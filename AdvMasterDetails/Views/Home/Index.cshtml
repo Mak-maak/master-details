@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Master Details entry form</h2>
+<div class="container">
+    <div class="master">
+        <h2>Order</h2>
+        <table class="table table-responsive">
+            <tr>
+                <td>Order Master</td>
+                <td>
+                    <input type="text" id="orderNo" class="form-control" />
+                    <span class="error">Order No required</span>
+                </td>
+                <td>Order Date</td>
+                <td>
+                    <input type="text" id="orderDate" class="form-control" />
+                    <span class="error">Valid Order Date required (ex: mm-dd-yyyy)</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td colspan="3">
+                    <textarea id="description" class="form-control"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="details">
+        <h2>Order Item</h2>
+        <table class="table table-responsive">
+            <tr>
+                <td>Category</td>
+                <td>Product</td>
+                <td>Quantity</td>
+                <td>Rate</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr class="my-container" id="mainRow">
+                <td>
+                    <select id="productCategory" class="pc form-control" onchange="LoadProduct(this)">
+                        <option>Select</option>
+                    </select>
+                    <span class="error">Select Product</span>
+                </td>
+                <td>
+                    <input type="text" id="quantity" class="quantity form-control" />
+                    <span class="error">Valid Quantity required</span>
+                </td>
+                <td>
+                    <input type="text" id="rate" class="rate form-control" />
+                    <span class="error">Valid rate required</span>
+                </td>
+                <td>
+                    <input type="button" id="btnAdd" value="add" style="width:80px;" class="btn btn-success"
+ />
+                </td>
+            </tr>
+        </table>
+        <div id="orderItems">
+            <table class="table table-responsive">
+
+            </table>
+            <span id="orderItemError" style="color: red;"></span>
+        </div>
+        <div style="padding:30px 0; text-align: right;">
+            <input id="submit" type="button" value="Save Order" class="btn btn-warning" style="padding:10px 20px;" />
+        </div>
+    </div>
+</div>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui-css" />
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui-js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#orderDate').datepicker({
+            dateFormat: 'mm/dd/yy'
+        })
+    });
+</script>
+<style>
+    span.error{
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+    tr.error{
+        background-color: rgba(255,0,0,0.35);
+    }
+</style>
+
