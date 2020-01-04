@@ -14,7 +14,7 @@ namespace AdvMasterDetails.Controllers
             return View();
         }
 
-        public JsonResult getProductCategories()
+        public JsonResult GetProductCategories()
         {
             // list of categories
             List<Category> categories = new List<Category>();
@@ -29,7 +29,7 @@ namespace AdvMasterDetails.Controllers
             return new JsonResult { Data = categories, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        public JsonResult getProducts(int categoryID)
+        public JsonResult GetProducts(int CategoryId)
         {
             // list of categories
             List<Product> products = new List<Product>();
@@ -37,7 +37,7 @@ namespace AdvMasterDetails.Controllers
             // using entity model to fetch categories from database
             using (MasterDetailsEntities db = new MasterDetailsEntities())
             {
-                products = db.Products.Where(w => w.CategoryId.Equals(categoryID)).OrderBy(o => o.ProductName).ToList();
+                products = db.Products.Where(w => w.CategoryId.Equals(CategoryId)).OrderBy(o => o.ProductName).ToList();
             }
 
             // return json
@@ -45,11 +45,11 @@ namespace AdvMasterDetails.Controllers
         }
 
         [HttpPost]
-        public ActionResult save(OrderMaster order)
+        public ActionResult Save(OrderMaster order)
         {
             bool status = false;
             DateTime dateOrg;
-            var isValidDate = DateTime.TryParseExact(order.OrderDate.ToString().Trim(), "mm-dd-yyyy", null, DateTimeStyles.None, out dateOrg);
+            var isValidDate = DateTime.TryParseExact(order.OrderDate.ToString(), "mm-dd-yyyy", null, DateTimeStyles.None, out dateOrg);
             if (isValidDate)
             {
                 order.OrderDate = dateOrg;
